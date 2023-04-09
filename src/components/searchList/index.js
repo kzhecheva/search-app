@@ -23,7 +23,11 @@ const List = styled.div`
 export function SearchList({ items, meta }) {
 	return (
 		<List>
-			{items && <Meta>{`About ${meta?.results} results (${meta?.time})`}</Meta>}
+			{items && (
+				<Meta>
+					About {meta?.results} results ({meta?.time})
+				</Meta>
+			)}
 			{items?.map((el) => (
 				<ListCard key={el?.id} element={el} />
 			))}
