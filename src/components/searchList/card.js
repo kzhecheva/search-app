@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
-const Title = styled(Link)`
+const Title = styled.a`
 	margin-top: 4px;
 	margin-bottom: 3px;
 	font-weight: 600;
@@ -18,7 +17,7 @@ const Card = styled.div`
 export const ListCard = ({ element }) => {
 	return (
 		<Card>
-			<Title to={`https://www.google.com/search?q=${element?.title}`}>{element?.title}</Title>
+			<Title href={`https://www.google.com/search?q=${element?.title}`}>{element?.title}</Title>
 			<div>Author: {element?.author}</div>
 			<div>Last read by: {element?.lastReadBy}</div>
 		</Card>
