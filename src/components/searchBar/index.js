@@ -113,7 +113,7 @@ const containerVariants = {
 
 const containerTransition = { type: "spring", damping: 22, stiffness: 150 };
 
-export function SearchBar({ setItems }) {
+export function SearchBar({ setItems, setMeta }) {
 	const inputRef = useRef(null);
 	const [parentRef, isClickedOutside] = useClickOutside();
 	const [isExpanded, setExpanded] = useState(false);
@@ -181,6 +181,10 @@ export function SearchBar({ setItems }) {
 			if (prev.find((el) => el.title === searchQuery)) return [...prev];
 			return [...prev, { title: searchQuery }];
 		});
+		const t0 = performance.now();
+		bookList?.filter((el) => el.title.startsWith(searchQuery));
+		const t1 = performance.now();
+		setMeta({ time: t1 - t0, results: filteredItems.length });
 		setItems(filteredItems);
 	};
 
@@ -191,7 +195,10 @@ export function SearchBar({ setItems }) {
 			if (prev.find((el) => el.title === searchQuery)) return [...prev];
 			return [...prev, { title: title }];
 		});
+		const t0 = performance.now();
 		const selectedBook = bookList?.find((el) => el.title === title);
+		const t1 = performance.now();
+		setMeta({ time: t1 - t0, results: [selectedBook].length });
 		setItems([selectedBook]);
 	};
 

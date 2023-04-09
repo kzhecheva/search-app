@@ -20,10 +20,10 @@ const List = styled.div`
 	z-index: -1;
 `;
 
-export function SearchList({ items }) {
+export function SearchList({ items, meta }) {
 	return (
 		<List>
-			{items && <Meta>{`About meta.results results meta.time`}</Meta>}
+			{items && <Meta>{`About ${meta?.results} results (${meta?.time})`}</Meta>}
 			{items?.map((el) => (
 				<ListCard key={el?.id} element={el} />
 			))}

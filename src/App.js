@@ -25,13 +25,14 @@ const AppContainer = styled.div(
 
 function App() {
 	const [items, setItems] = useState(null);
+	const [meta, setMeta] = useState(null);
 
 	return (
 		<AppContainer isInitial={!items}>
 			<ItemsContext.Provider value={items}>
 				<SearchTitle />
-				<SearchBar setItems={setItems} />
-				<SearchList items={items} />
+				<SearchBar setItems={setItems} setMeta={setMeta} />
+				<SearchList items={items} meta={meta} />
 			</ItemsContext.Provider>
 		</AppContainer>
 	);
