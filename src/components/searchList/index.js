@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { ListCard } from "./card";
+import { ItemsContext, MetaContext } from "../../data/state";
 
 const Meta = styled.div`
 	overflow: hidden;
@@ -20,10 +21,17 @@ const List = styled.div`
 	z-index: -1;
 `;
 
-export function SearchList({ items, meta }) {
+export function SearchList() {
+	const { items } = useContext(ItemsContext);
+	const { meta } = useContext(MetaContext);
+
 	return (
 		<List>
-			{items && <Meta>{`About ${meta?.results} results (${meta?.time})`}</Meta>}
+			{items && (
+				<Meta>
+					About {meta?.results} results ({meta?.time})
+				</Meta>
+			)}
 			{items?.map((el) => (
 				<ListCard key={el?.id} element={el} />
 			))}

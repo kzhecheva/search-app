@@ -1,6 +1,6 @@
 import { SearchBar } from "./components/searchBar";
 import { SearchList } from "./components/searchList";
-import { ItemsContext } from "./data/state";
+import { ItemsContext, MetaContext } from "./data/state";
 import { useState } from "react";
 import { SearchTitle } from "./components/serchTitle";
 import styled, { css } from "styled-components";
@@ -29,11 +29,13 @@ function App() {
 
 	return (
 		<AppContainer isInitial={!items}>
-			<ItemsContext.Provider value={items}>
-				<SearchTitle />
-				<SearchBar setItems={setItems} setMeta={setMeta} />
-				<SearchList items={items} meta={meta} />
-			</ItemsContext.Provider>
+			<MetaContext.Provider value={{ meta, setMeta }}>
+				<ItemsContext.Provider value={{ items, setItems }}>
+					<SearchTitle />
+					<SearchBar />
+					<SearchList />
+				</ItemsContext.Provider>
+			</MetaContext.Provider>
 		</AppContainer>
 	);
 }
